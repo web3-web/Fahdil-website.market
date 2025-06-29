@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAHDiL Store</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-100">
+  <header class="bg-blue-600 text-white p-6 text-center shadow-lg">
+    <h1 class="text-3xl font-bold">FAHDiL Store</h1>
+    <p class="text-sm">Jualan Online & Marketing Langsung</p>
+  </header>
+
+  <section class="p-4">
+    <h2 class="text-2xl font-semibold mb-4">Daftar Produk</h2>
+    <div id="produk-container" class="flex flex-wrap justify-center"></div>
+  </section>
+
+  <section class="bg-white p-6 mt-6 shadow-inner">
+    <h3 class="text-xl font-semibold mb-2">Hubungi Kami</h3>
+    <p>Nomor WhatsApp: <span id="no-wa">+62 831-3181-0087</span></p>
+    <p>Email: info@fahdilstore.com</p>
+  </section>
+
+  <section id="login-form" class="bg-yellow-100 p-6 mt-10 max-w-md mx-auto rounded shadow">
+    <h2 class="text-xl font-bold mb-2">Login Admin</h2>
+    <form onsubmit="loginOwner(event)">
+      <input id="login-user" type="text" placeholder="Username" class="w-full p-2 mb-2 rounded" required />
+      <input id="login-pass" type="password" placeholder="Password" class="w-full p-2 mb-2 rounded" required />
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Login</button>
+    </form>
+  </section>
+
+  <section id="owner-dashboard" class="bg-gray-800 text-white p-6 mt-10 hidden">
+    <div class="flex justify-between items-center">
+      <h2 class="text-2xl font-bold">FAHDiL Owner Dashboard</h2>
+      <button onclick="logoutOwner()" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">Logout</button>
+    </div>
+    <p>Halaman ini khusus untuk pemilik web.</p>
+
+    <div class="mt-4">
+      <h3 class="text-lg font-semibold">Riwayat Transaksi:</h3>
+      <ul id="riwayat-transaksi" class="mt-2 text-sm list-decimal ml-6"></ul>
+    </div>
+
+    <div class="mt-6">
+      <h3 class="text-lg font-semibold">Pengaturan Nomor WA</h3>
+      <input id="input-wa" type="text" placeholder="Masukkan nomor WA baru (628xx)" class="p-2 rounded text-black w-full max-w-sm" />
+      <button onclick="updateNomorWA()" class="mt-2 bg-yellow-400 text-black px-4 py-2 rounded-xl hover:bg-yellow-500">Ubah Nomor WA</button>
+    </div>
+
+    <div class="mt-6">
+      <h3 class="text-lg font-semibold">Tambah Produk Manual</h3>
+      <form id="form-produk" onsubmit="tambahProdukManual(event)" class="text-black">
+        <input id="nama-produk" type="text" placeholder="Nama Produk" class="block p-2 mb-2 rounded w-full max-w-sm" required />
+        <input id="harga-produk" type="number" placeholder="Harga Produk" class="block p-2 mb-2 rounded w-full max-w-sm" required />
+        <input id="gambar-produk" type="text" placeholder="URL Gambar Produk" class="block p-2 mb-2 rounded w-full max-w-sm" required />
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Tambah Produk</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-blue-700 text-white text-center p-4 mt-6">
+    &copy; 2025 FAHDiL Store. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
