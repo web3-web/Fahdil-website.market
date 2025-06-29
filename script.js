@@ -1,8 +1,8 @@
 let nomorWhatsApp = "6283131810087";
 let transaksi = [];
 let produkTambahan = [];
-const adminUsername = "admin";
-const adminPassword = "fahdil123";
+const adminUsername = "WEB ADMIN";
+const adminPassword = "OWNER123";
 
 function kirimPesan(namaProduk, hargaProduk) {
   const waktu = new Date().toLocaleString('id-ID');
@@ -62,13 +62,22 @@ function tambahProdukManual(e) {
   const produk = { nama, harga, gambar };
   produkTambahan.push(produk);
   localStorage.setItem('produkTambahan', JSON.stringify(produkTambahan));
-  renderProdukManual();
+  renderUlangProdukManual();
   e.target.reset();
 }
 
-function renderProdukManual() {
+function hapusProduk(index) {
+  if (confirm("Yakin ingin menghapus produk ini?")) {
+    produkTambahan.splice(index, 1);
+    localStorage.setItem('produkTambahan', JSON.stringify(produkTambahan));
+    renderUlangProdukManual();
+  }
+}
+
+function renderUlangProdukManual() {
   const container = document.getElementById('produk-container');
-  produkTambahan.forEach((item) => {
+  container.innerHTML = "";
+  produkTambahan.forEach((item, index) => {
     const div = document.createElement('div');
     div.className = "bg-white shadow-xl rounded-2xl p-4 m-2 w-72";
     div.innerHTML = `
@@ -76,6 +85,7 @@ function renderProdukManual() {
       <h2 class="text-xl font-bold">${item.nama}</h2>
       <p class="text-gray-700">Harga: Rp${item.harga}</p>
       <button onclick="kirimPesan('${item.nama}', ${item.harga})" class="mt-2 bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600">Beli via WhatsApp</button>
+      <button onclick="hapusProduk(${index})" class="mt-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 w-full">Hapus</button>
     `;
     container.appendChild(div);
   });
@@ -101,7 +111,7 @@ function init() {
   generateProdukDummy();
   if (localStorage.getItem('produkTambahan')) {
     produkTambahan = JSON.parse(localStorage.getItem('produkTambahan'));
-    renderProdukManual();
+    renderUlangProdukManual();
   }
   if (localStorage.getItem('transaksiFAHDIL')) {
     transaksi = JSON.parse(localStorage.getItem('transaksiFAHDIL'));
